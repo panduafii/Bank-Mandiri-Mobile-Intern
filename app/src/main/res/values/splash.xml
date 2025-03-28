@@ -1,9 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
-
 <resources>
     <style name="App.Starting.Theme" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">#FFFFFF</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash</item>
+        <!-- Warna latar belakang splash screen -->
+        <item name="windowSplashScreenBackground">@color/white</item>
+
+        <!-- Gunakan logo splash tanpa background bulat -->
+        <item name="windowSplashScreenAnimatedIcon">@drawable/logo_splash</item>
+
+        <!-- Pastikan background sekitar ikon transparan -->
+        <item name="windowSplashScreenIconBackgroundColor">@android:color/transparent</item>
+
+        <!-- Setelah splash selesai, masuk ke tema utama -->
         <item name="postSplashScreenTheme">@style/Theme.NewsApp</item>
     </style>
 </resources>

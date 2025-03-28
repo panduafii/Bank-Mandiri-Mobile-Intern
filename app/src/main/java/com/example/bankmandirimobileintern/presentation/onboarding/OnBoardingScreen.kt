@@ -23,6 +23,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 
 import androidx.compose.ui.unit.dp
 import com.example.bankmandirimobileintern.presentation.onboarding.components.OnBoardingPage
@@ -31,11 +32,20 @@ import com.example.bankmandirimobileintern.presentation.common.NewsButton
 import com.example.bankmandirimobileintern.presentation.common.NewsTextButton
 
 import com.example.bankmandirimobileintern.presentation.onboarding.components.PagerIndicator
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun OnBoardingScreen() {
+    val isSystemInDarkMode = isSystemInDarkTheme()
+    val systemUiColor = rememberSystemUiController()
+    SideEffect {
+        systemUiColor.setSystemBarsColor(
+            color = Color.Black.copy(0.1f),
+            darkIcons = isSystemInDarkMode
+        )
+    }
     Column(modifier = Modifier.fillMaxSize()) {
         val pagerState = rememberPagerState(initialPage = 0) {
             pages.size
