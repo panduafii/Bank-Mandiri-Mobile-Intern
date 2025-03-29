@@ -17,9 +17,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.lifecycleScope
 import com.example.bankmandirimobileintern.domain.manager.usecase.AppEntryUseCases
 import com.example.bankmandirimobileintern.presentation.onboarding.OnBoardingScreen
+import com.example.bankmandirimobileintern.presentation.onboarding.OnBoardingViewModel
 import com.example.bankmandirimobileintern.ui.theme.BankMandiriMobileInternTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -30,8 +32,10 @@ class MainActivity : ComponentActivity() {
 
     @Inject
     lateinit var appEntryUseCases: AppEntryUseCases
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
         installSplashScreen()
@@ -46,7 +50,10 @@ class MainActivity : ComponentActivity() {
             BankMandiriMobileInternTheme (dynamicColor = false) {
 
                 Box(modifier = Modifier.background(MaterialTheme.colorScheme.background)) {
-                    OnBoardingScreen()
+                    val viewModel: OnBoardingViewModel = hiltViewModel()
+                    OnBoardingScreen(
+                        onEvent = viewModel::onEvent
+                    )
                 }
             }
         }

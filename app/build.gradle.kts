@@ -1,8 +1,9 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.kapt)
-    alias(libs.plugins.dagger.hilt)
+    id("kotlin-kapt")
+    alias(libs.plugins.dagger.hilt) // Ini sudah menggunakan versi 2.45
+    id("kotlin-parcelize")
 }
 
 android {
@@ -32,27 +33,33 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
     buildFeatures {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.5" // Periksa versi terbaru yang kompatibel dengan Kotlin 1.9.0
     }
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    kapt {
+        correctErrorTypes = true
+        useBuildCache = false
+        arguments {
+            arg("dagger.fastInit", "enabled")
+        }
+    }
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -69,7 +76,7 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1") // Pastikan versinya sesuai
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1") // Pastikan versinya sesuai dengan Kotlin 1.9.0
 
     // Splash API
     implementation("androidx.core:core-splashscreen:1.0.1")
@@ -78,9 +85,9 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.6.0")
 
     // Dagger Hilt
-    implementation("com.google.dagger:hilt-android:2.45")
-    kapt("com.google.dagger:hilt-compiler:2.45")
-    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
+    implementation(libs.hilt.android.v248)
+    kapt(libs.hilt.android.compiler.v2461)
+    implementation(libs.androidx.hilt.navigation.compose.v120)
 
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
