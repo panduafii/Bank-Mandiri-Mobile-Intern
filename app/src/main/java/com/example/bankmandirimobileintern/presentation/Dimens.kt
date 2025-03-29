@@ -1,4 +1,4 @@
-package com.example.bankmandirimobileintern.presentation.onboarding
+package com.example.bankmandirimobileintern.presentation
 
 import androidx.compose.ui.unit.dp
 

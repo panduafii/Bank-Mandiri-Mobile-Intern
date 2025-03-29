@@ -43,7 +43,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.5" // Periksa versi terbaru yang kompatibel dengan Kotlin 1.9.0
+        kotlinCompilerExtensionVersion = "1.5.2" // Periksa versi terbaru yang kompatibel dengan Kotlin 1.9.0
     }
     packaging {
         resources {
@@ -85,9 +85,10 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.6.0")
 
     // Dagger Hilt
-    implementation(libs.hilt.android.v248)
-    kapt(libs.hilt.android.compiler.v2461)
-    implementation(libs.androidx.hilt.navigation.compose.v120)
+    // Dagger Hilt
+    implementation("com.google.dagger:hilt-android:2.49")
+    kapt("com.google.dagger:hilt-android-compiler:2.49")
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")

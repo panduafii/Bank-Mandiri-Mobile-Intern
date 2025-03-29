@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,6 +21,7 @@ import androidx.core.view.WindowCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.lifecycleScope
 import com.example.bankmandirimobileintern.domain.manager.usecase.AppEntryUseCases
+import com.example.bankmandirimobileintern.presentation.navgraph.NavGraph
 import com.example.bankmandirimobileintern.presentation.onboarding.OnBoardingScreen
 import com.example.bankmandirimobileintern.presentation.onboarding.OnBoardingViewModel
 import com.example.bankmandirimobileintern.ui.theme.BankMandiriMobileInternTheme
@@ -30,30 +32,36 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    @Inject
-    lateinit var appEntryUseCases: AppEntryUseCases
+//    @Inject
+//    lateinit var appEntryUseCases: AppEntryUseCases
+
+    private val viewModel by viewModels<MainViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
-        installSplashScreen()
-        lifecycleScope.launch {
-            appEntryUseCases.readAppEntry().collect{
-                Log.d("Test", it.toString())
-            }
+        installSplashScreen().apply {
+            setKeepOnScreenCondition(condition = { viewModel.splashCondition.value })
         }
+
+//        lifecycleScope.launch {
+//            appEntryUseCases.readAppEntry().collect{
+//                Log.d("Test", it.toString())
+//            }
+//        }
 
 
         setContent {
             BankMandiriMobileInternTheme (dynamicColor = false) {
 
                 Box(modifier = Modifier.background(MaterialTheme.colorScheme.background)) {
-                    val viewModel: OnBoardingViewModel = hiltViewModel()
-                    OnBoardingScreen(
-                        onEvent = viewModel::onEvent
-                    )
+//                    val viewModel: OnBoardingViewModel = hiltViewModel()
+//                    OnBoardingScreen(
+//                        onEvent = viewModel::onEvent
+//                    )
+                    NavGraph(startDestination = viewModel.startDestination.value)
                 }
             }
         }

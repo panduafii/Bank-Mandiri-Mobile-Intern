@@ -1,7 +1,7 @@
 [versions]
 agp = "8.6.1"
-hiltAndroid = "2.48"
-hiltAndroidCompiler = "2.46.1"
+hiltAndroid = "2.49"
+hiltAndroidCompiler = "2.49"
 hiltNavigationCompose = "1.2.0"
 kotlin = "1.9.0"
 coreKtx = "1.15.0"
@@ -10,16 +10,17 @@ junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 lifecycleRuntimeKtx = "2.8.7"
 activityCompose = "1.9.3"
-composeBom = "2024.04.01"
-daggerHilt = "2.45"
-navCompose = "2.6.0"
+composeBom = "2025.03.01"
+daggerHilt = "2.49"
+navCompose = "2.8.9"
 retrofit = "2.9.0"
 coil = "2.4.0"
 paging = "3.1.1"
 room = "2.5.2"
 accompanist = "0.31.4-beta"
 protoliteWellKnownTypes = "18.0.1"
-hilt = "2.44"
+hilt = "2.42"
+
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -58,7 +59,7 @@ protolite-well-known-types = { group = "com.google.firebase", name = "protolite-
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "daggerHilt" }
+dagger-hilt = { id = "com.google.dagger.hilt.android", version = "2.49" }
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }

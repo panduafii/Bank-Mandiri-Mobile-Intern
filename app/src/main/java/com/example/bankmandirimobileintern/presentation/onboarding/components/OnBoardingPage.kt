@@ -19,8 +19,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.bankmandirimobileintern.R
 import com.example.bankmandirimobileintern.presentation.onboarding.Page
-import com.example.bankmandirimobileintern.presentation.onboarding.Dimens.MediumPadding1
-import com.example.bankmandirimobileintern.presentation.onboarding.Dimens.MediumPadding2
+import com.example.bankmandirimobileintern.presentation.Dimens.MediumPadding1
+import com.example.bankmandirimobileintern.presentation.Dimens.MediumPadding2
 import com.example.bankmandirimobileintern.ui.theme.BankMandiriMobileInternTheme
 
 
