@@ -1,4 +1,4 @@
-package com.example.bankmandirimobileintern.domain.manager.usecase
+package com.example.bankmandirimobileintern.domain.manager.usecases.app_entry
 
 import com.example.bankmandirimobileintern.domain.manager.LocalUserManager
 

@@ -3,7 +3,7 @@ package com.example.bankmandirimobileintern.mainActivity
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.bankmandirimobileintern.domain.manager.usecase.AppEntryUseCases
+import com.example.bankmandirimobileintern.domain.manager.usecases.app_entry.AppEntryUseCases
 import com.example.bankmandirimobileintern.presentation.navgraph.Route
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay

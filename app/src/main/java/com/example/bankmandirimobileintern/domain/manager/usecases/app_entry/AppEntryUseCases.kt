@@ -1,4 +1,4 @@
-package com.example.bankmandirimobileintern.domain.manager.usecase
+package com.example.bankmandirimobileintern.domain.manager.usecases.app_entry
 
 data class AppEntryUseCases(
     val readAppEntry: ReadAppEntry,

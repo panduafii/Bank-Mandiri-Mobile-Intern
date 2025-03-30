@@ -1,4 +1,4 @@
-package com.example.bankmandirimobileintern.data.remote.dto
+package com.example.bankmandirimobileintern.domain.manager.model
 
 data class Article(
     val author: String,

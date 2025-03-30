@@ -3,9 +3,9 @@ package com.example.bankmandirimobileintern.data.di
 import android.app.Application
 import com.example.bankmandirimobileintern.data.manager.LocalUserManagerImpl
 import com.example.bankmandirimobileintern.domain.manager.LocalUserManager
-import com.example.bankmandirimobileintern.domain.manager.usecase.AppEntryUseCases
-import com.example.bankmandirimobileintern.domain.manager.usecase.ReadAppEntry
-import com.example.bankmandirimobileintern.domain.manager.usecase.SaveAppEntry
+import com.example.bankmandirimobileintern.domain.manager.usecases.app_entry.AppEntryUseCases
+import com.example.bankmandirimobileintern.domain.manager.usecases.app_entry.ReadAppEntry
+import com.example.bankmandirimobileintern.domain.manager.usecases.app_entry.SaveAppEntry
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
