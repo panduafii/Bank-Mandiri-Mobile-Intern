@@ -20,6 +20,10 @@ class NewsRepositoryImpl(private val newsApi: NewsApi): NewsRepository {
         ).flow
     }
 
+    override fun searchNews(searchQuery: String, sources: List<String>): Flow<PagingData<Article>> {
+        TODO("Not yet implemented")
+    }
+
 //    override fun searchNews(searchQuery: String, sources: List<String>): Flow<PagingData<Article>> {
 //        return Pager(
 //            config = PagingConfig(pageSize = 10),
