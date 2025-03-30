@@ -1,7 +1,11 @@
 package com.example.bankmandirimobileintern.presentation.navgraph
 
+import android.util.Log
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -31,17 +35,28 @@ fun NavGraph(
             startDestination = Route.HomeScreen.route
         ) {
             composable(route = Route.HomeScreen.route) {
-
+                Log.d("NavGraph", "Navigating to HomeScreen")
+//                Text(text = "news nav screen")
+                // Tempatkan konten untuk HomeScreen
             }
             composable(route = Route.SearchScreen.route) {
-
+                Log.d("NavGraph", "Navigating to SearchScreen")
+                // Tempatkan konten untuk SearchScreen
             }
             composable(route = Route.BookmarkScreen.route) {
-
+                Log.d("NavGraph", "Navigating to BookmarkScreen")
+                // Tempatkan konten untuk BookmarkScreen
             }
             composable(route = Route.DetailsScreen.route) {
-
+                Log.d("NavGraph", "Navigating to DetailsScreen")
+                // Tempatkan konten untuk DetailsScreen
             }
         }
     }
 }
+
+//Kondisi login atau status aplikasi: Bisa jadi ada pengecekan status pengguna yang langsung menuju HomeScreen tanpa memeriksa apakah pengguna baru atau sudah melewati onboarding. Pastikan untuk memeriksa apakah status pengguna sudah diset untuk melalui onboarding.
+//
+//Pengaturan default: Pastikan bahwa pada aplikasi Anda tidak ada pengaturan default yang langsung mem-bypass onboarding. Misalnya, jika status pengguna disimpan dalam preferensi atau database lokal, pastikan pengaturan ini tidak langsung mengarah ke HomeScreen tanpa melewati proses onboarding.
+//
+//Masalah dengan Flow di NavGraph: Cek bagaimana NavGraph diatur. Biasanya, aplikasi menggunakan NavController untuk mendefinisikan urutan halaman yang akan dibuka. Jika alur ini tidak benar, itu bisa mengarahkan ke halaman yang salah.
