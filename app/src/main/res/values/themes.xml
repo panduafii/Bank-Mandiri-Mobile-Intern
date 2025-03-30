@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.NewsApp" parent="android:Theme.Material.Light.NoActionBar">
+    <style name="Theme.BankMandiriMobileIntern" parent="android:Theme.Material.Light.NoActionBar">
         <!-- Tambahkan warna latar belakang yang sesuai -->
-        <item name="android:windowBackground">@color/white</item>
+<!--        <item name="android:windowBackground">@color/white</item>-->
+            <item name="android:windowBackground">@color/transparent</item>
     </style>
 </resources>

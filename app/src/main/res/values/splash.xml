@@ -1,7 +1,7 @@
 <resources>
     <style name="App.Starting.Theme" parent="Theme.SplashScreen">
         <!-- Warna latar belakang splash screen -->
-        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenBackground">@color/transparent</item>
 
         <!-- Gunakan logo splash tanpa background bulat -->
         <item name="windowSplashScreenAnimatedIcon">@drawable/logo_splash</item>
@@ -10,6 +10,6 @@
         <item name="windowSplashScreenIconBackgroundColor">@android:color/transparent</item>
 
         <!-- Setelah splash selesai, masuk ke tema utama -->
-        <item name="postSplashScreenTheme">@style/Theme.NewsApp</item>
+        <item name="postSplashScreenTheme">@style/Theme.BankMandiriMobileIntern</item>
     </style>
 </resources>

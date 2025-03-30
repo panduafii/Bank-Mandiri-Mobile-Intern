@@ -10,6 +10,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
+import com.example.bankmandirimobileintern.presentation.news_navigator.components.NewsNavigator
 import com.example.bankmandirimobileintern.presentation.onboarding.OnBoardingScreen
 import com.example.bankmandirimobileintern.presentation.onboarding.OnBoardingViewModel
 
@@ -36,7 +37,6 @@ fun NavGraph(
         ) {
             composable(route = Route.HomeScreen.route) {
                 Log.d("NavGraph", "Navigating to HomeScreen")
-//                Text(text = "news nav screen")
                 // Tempatkan konten untuk HomeScreen
             }
             composable(route = Route.SearchScreen.route) {
@@ -50,6 +50,9 @@ fun NavGraph(
             composable(route = Route.DetailsScreen.route) {
                 Log.d("NavGraph", "Navigating to DetailsScreen")
                 // Tempatkan konten untuk DetailsScreen
+            }
+            composable(route = Route.NewsNavigatorScreen.route){
+                NewsNavigator()
             }
         }
     }

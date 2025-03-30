@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="App.Starting.Theme" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">#FFFFFF</item>
+        <!-- Warna latar belakang splash screen -->
+        <item name="windowSplashScreenBackground">@color/transparent</item>
+
         <item name="windowSplashScreenAnimatedIcon">@drawable/logo_splash</item>
-        <item name="postSplashScreenTheme">@style/Theme.NewsApp</item>
+
+        <!-- Pastikan background sekitar ikon transparan -->
+        <item name="windowSplashScreenIconBackgroundColor">@android:color/transparent</item>
+
+        <item name="postSplashScreenTheme">@style/Theme.BankMandiriMobileIntern</item>
     </style>
 </resources>
