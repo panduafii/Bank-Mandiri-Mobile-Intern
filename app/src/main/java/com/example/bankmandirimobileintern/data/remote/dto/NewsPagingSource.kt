@@ -1,5 +1,6 @@
 package com.example.bankmandirimobileintern.data.remote.dto
 
+import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.bankmandirimobileintern.domain.manager.model.Article
@@ -8,7 +9,6 @@ class NewsPagingSource(
     private val newsApi: NewsApi,
     private val sources: String
 ) : PagingSource<Int, Article>() {
-
 
     override fun getRefreshKey(state: PagingState<Int, Article>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
@@ -23,19 +23,26 @@ class NewsPagingSource(
         val page = params.key ?: 1
         return try {
             val newsResponse = newsApi.getNews(sources = sources, page = page)
-            totalNewsCount += newsResponse.articles.size
-            val articles = newsResponse.articles.distinctBy { it.title } //Remove duplicates
+
+            // Cetak seluruh artikel untuk investigasi
+            newsResponse.articles.forEach { article ->
+                Log.d("NewsAPI", "Title: ${article.title}")
+            }
+
+            val filteredArticles = newsResponse.articles
+                .filterNot { article ->
+                    article.title?.contains("The latest five minute news bulletin from BBC World Service", ignoreCase = true) == true ||
+                            article.title?.contains("latest news bulletin", ignoreCase = true) == true
+                }
+                .distinctBy { it.title }
 
             LoadResult.Page(
-                data = articles,
-                nextKey = if (totalNewsCount == newsResponse.totalResults) null else page + 1,
+                data = filteredArticles,
+                nextKey = if (filteredArticles.isEmpty()) null else page + 1,
                 prevKey = null
             )
         } catch (e: Exception) {
-            e.printStackTrace()
-            LoadResult.Error(
-                throwable = e
-            )
+            LoadResult.Error(throwable = e)
         }
     }
 }

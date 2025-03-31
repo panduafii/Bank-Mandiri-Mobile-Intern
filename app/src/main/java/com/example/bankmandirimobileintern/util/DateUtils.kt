@@ -6,7 +6,12 @@ import java.util.Locale
 import java.util.TimeZone
 
 object DateUtils {
-    fun formatPublishedDate(dateString: String): String {
+    fun formatPublishedDate(dateString: String?): String {
+        // Periksa apakah dateString null atau kosong
+        if (dateString.isNullOrBlank()) {
+            return "" // Atau return "No date available" sesuai kebutuhan
+        }
+
         try {
             // Cek apakah string memiliki format timestamp
             if (dateString.contains("T")) {
@@ -23,8 +28,8 @@ object DateUtils {
             }
             return dateString
         } catch (e: Exception) {
-            // Jika error, kembalikan format asli
-            return dateString
+            // Jika error, kembalikan string kosong atau pesan default
+            return ""
         }
     }
 }

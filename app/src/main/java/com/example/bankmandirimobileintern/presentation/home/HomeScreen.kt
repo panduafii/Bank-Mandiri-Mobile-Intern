@@ -65,7 +65,8 @@ fun HomeScreen(
             if (articles.itemCount > 10) {
                 articles.itemSnapshotList.items
                     .slice(IntRange(start = 0, endInclusive = 9))
-                    .joinToString(separator = " \uD83D\uDFE5 ") { it.title }
+                    .mapNotNull { it.title } // Ambil title yang bukan null
+                    .joinToString(separator = " \uD83D\uDFE5 ")
             } else {
                 ""
             }
