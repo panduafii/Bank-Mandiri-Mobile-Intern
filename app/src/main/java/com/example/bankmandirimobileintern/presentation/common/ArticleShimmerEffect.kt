@@ -37,22 +37,29 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.unit.dp
 import com.example.bankmandirimobileintern.ui.theme.BankMandiriMobileInternTheme
 
-fun Modifier.shimmerEffect() = composed {
-    val transition = rememberInfiniteTransition(label = "shimmer")
-    val alpha by transition.animateFloat(
-        initialValue = 0.2f,
-        targetValue = 0.9f,
-        animationSpec = infiniteRepeatable(
+fun Modifier.shimmerEffect(cornerRadius: CornerRadius = CornerRadius(x = 12f, y = 12f)) = composed {
+    val transition = rememberInfiniteTransition(label = "shimmer effect")
+    val alpha = transition.animateFloat(
+        initialValue = 0.2f, targetValue = 0.9f, animationSpec = infiniteRepeatable(
             animation = tween(durationMillis = 1000),
             repeatMode = RepeatMode.Reverse
         ),
-        label = "shimmer alpha"
-    )
-    background(color = colorResource(id = R.color.shimmer).copy(alpha = alpha))
+        label = "transparency of the background color"
+    ).value
+    val color = colorResource(id = R.color.shimmer).copy(alpha = alpha)
+    drawBehind {
+        drawRoundRect(
+            color = color,
+            cornerRadius = cornerRadius
+        )
+    }
 }
+
 
 @Composable
 fun ArticleCardShimmerEffect(modifier: Modifier = Modifier) {
@@ -88,6 +95,7 @@ fun ArticleCardShimmerEffect(modifier: Modifier = Modifier) {
                         .height(15.dp)
                         .shimmerEffect()
                 )
+
             }
         }
     }
