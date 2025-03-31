@@ -33,24 +33,8 @@ fun NavGraph(
 
         navigation(
             route = Route.NewsNavigation.route,
-            startDestination = Route.HomeScreen.route
+            startDestination = Route.NewsNavigatorScreen.route
         ) {
-            composable(route = Route.HomeScreen.route) {
-                Log.d("NavGraph", "Navigating to HomeScreen")
-                // Tempatkan konten untuk HomeScreen
-            }
-            composable(route = Route.SearchScreen.route) {
-                Log.d("NavGraph", "Navigating to SearchScreen")
-                // Tempatkan konten untuk SearchScreen
-            }
-            composable(route = Route.BookmarkScreen.route) {
-                Log.d("NavGraph", "Navigating to BookmarkScreen")
-                // Tempatkan konten untuk BookmarkScreen
-            }
-            composable(route = Route.DetailsScreen.route) {
-                Log.d("NavGraph", "Navigating to DetailsScreen")
-                // Tempatkan konten untuk DetailsScreen
-            }
             composable(route = Route.NewsNavigatorScreen.route){
                 NewsNavigator()
             }

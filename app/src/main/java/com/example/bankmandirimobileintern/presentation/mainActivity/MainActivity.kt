@@ -1,4 +1,4 @@
-package com.example.bankmandirimobileintern.mainActivity
+package com.example.bankmandirimobileintern.presentation.mainActivity
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

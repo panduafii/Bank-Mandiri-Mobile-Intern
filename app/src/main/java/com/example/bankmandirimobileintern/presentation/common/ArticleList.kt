@@ -8,13 +8,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import com.example.bankmandirimobileintern.domain.manager.model.Article
 import com.example.bankmandirimobileintern.presentation.Dimens.ExtraSmallPadding2
 import com.example.bankmandirimobileintern.presentation.Dimens.MediumPadding1
-import com.example.bankmandirimobileintern.presentation.onboarding.components.ArticleCard
+import com.example.bankmandirimobileintern.presentation.home.components.ArticleCard
+
 
 @Composable
 fun ArticlesList(
@@ -29,7 +31,7 @@ fun ArticlesList(
     if (handlePagingResult) {
         LazyColumn(
             modifier = modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.spacedBy(MediumPadding1),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
             contentPadding = PaddingValues(all = ExtraSmallPadding2)
         ) {
             items(

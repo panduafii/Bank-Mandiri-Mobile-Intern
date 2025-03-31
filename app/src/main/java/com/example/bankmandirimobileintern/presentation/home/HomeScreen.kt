@@ -54,7 +54,7 @@ import com.example.bankmandirimobileintern.ui.theme.BankMandiriMobileInternTheme
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun HomeScreen(articles: LazyPagingItems<Article>, navController: NavController) {
+fun HomeScreen(articles: LazyPagingItems<Article>, navigate:(String) -> Unit) {
 
     val titles by remember {
         derivedStateOf {
@@ -75,7 +75,7 @@ fun HomeScreen(articles: LazyPagingItems<Article>, navController: NavController)
             .statusBarsPadding()
     ) {
         Image(
-            painter = painterResource(id = R.drawable.logo_splash),//check the logo here
+            painter = painterResource(id = R.drawable.logo),//check the logo here
             contentDescription = null,
             modifier = Modifier
                 .width(150.dp)
@@ -94,7 +94,7 @@ fun HomeScreen(articles: LazyPagingItems<Article>, navController: NavController)
             onValueChange = {},
             onSearch = {},
             onClick = {
-                navController.navigate(Route.SearchScreen.route)
+                navigate(Route.SearchScreen.route)
             }
         )
 

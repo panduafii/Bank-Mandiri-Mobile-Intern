@@ -8,8 +8,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.unit.dp
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.example.bankmandirimobileintern.presentation.Dimens.BigPadding1
 import com.example.bankmandirimobileintern.presentation.Dimens.MediumPadding1
+import com.example.bankmandirimobileintern.presentation.Dimens.MediumPadding2
+import com.example.bankmandirimobileintern.presentation.Dimens.MediumPadding3
 import com.example.bankmandirimobileintern.presentation.common.ArticlesList
 import com.example.bankmandirimobileintern.presentation.common.SearchBar
 
@@ -22,7 +26,7 @@ fun SearchScreen(
 
     Column(
         modifier = Modifier
-            .padding(top = MediumPadding1, start = MediumPadding1, end = MediumPadding1)
+            .padding(top = BigPadding1, start = MediumPadding1, end = MediumPadding1)
     ) {
         SearchBar(
             modifier = Modifier.fillMaxWidth(),

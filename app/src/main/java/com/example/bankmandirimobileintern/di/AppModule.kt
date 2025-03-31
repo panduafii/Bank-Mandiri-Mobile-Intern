@@ -1,4 +1,4 @@
-package com.example.bankmandirimobileintern.data.di
+package com.example.bankmandirimobileintern.di
 
 import android.app.Application
 import com.example.bankmandirimobileintern.data.manager.LocalUserManagerImpl

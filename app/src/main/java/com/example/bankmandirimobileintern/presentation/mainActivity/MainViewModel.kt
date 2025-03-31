@@ -1,4 +1,4 @@
-package com.example.bankmandirimobileintern.mainActivity
+package com.example.bankmandirimobileintern.presentation.mainActivity
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
