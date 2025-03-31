@@ -2,5 +2,9 @@ package com.example.bankmandirimobileintern.domain.manager.usecases.app_entry.ne
 
 data class NewsUseCases(
     val getNews: GetNews,
-    val searchNews: SearchNews
+    val searchNews: SearchNews,
+    val upsertArticle: UpsertArticle,
+    val deleteArticle: DeleteArticle,
+    val getArticles: GetArticles,
+    val getArticle: GetArticle
 )

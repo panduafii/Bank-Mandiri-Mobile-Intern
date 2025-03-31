@@ -13,9 +13,13 @@ import com.example.bankmandirimobileintern.domain.manager.repository.NewsReposit
 import com.example.bankmandirimobileintern.domain.manager.usecases.app_entry.AppEntryUseCases
 import com.example.bankmandirimobileintern.domain.manager.usecases.app_entry.ReadAppEntry
 import com.example.bankmandirimobileintern.domain.manager.usecases.app_entry.SaveAppEntry
+import com.example.bankmandirimobileintern.domain.manager.usecases.app_entry.news.DeleteArticle
+import com.example.bankmandirimobileintern.domain.manager.usecases.app_entry.news.GetArticle
+import com.example.bankmandirimobileintern.domain.manager.usecases.app_entry.news.GetArticles
 import com.example.bankmandirimobileintern.domain.manager.usecases.app_entry.news.GetNews
 import com.example.bankmandirimobileintern.domain.manager.usecases.app_entry.news.NewsUseCases
 import com.example.bankmandirimobileintern.domain.manager.usecases.app_entry.news.SearchNews
+import com.example.bankmandirimobileintern.domain.manager.usecases.app_entry.news.UpsertArticle
 import com.example.bankmandirimobileintern.util.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -38,10 +42,10 @@ object AppModule {
     @Provides
     @Singleton
     fun provideAppEntryUseCases(
-        localUserManger: LocalUserManager
+        localUserManager: LocalUserManager
     ): AppEntryUseCases = AppEntryUseCases(
-        readAppEntry = ReadAppEntry(localUserManger),
-        saveAppEntry = SaveAppEntry(localUserManger)
+        readAppEntry = ReadAppEntry(localUserManager),
+        saveAppEntry = SaveAppEntry(localUserManager)
     )
 
     @Provides
@@ -67,11 +71,16 @@ object AppModule {
     @Provides
     @Singleton
     fun provideNewsUseCases(
-        newsRepository: NewsRepository
+        newsRepository: NewsRepository,
+        newsDao: NewsDao
     ): NewsUseCases {
         return NewsUseCases(
             getNews = GetNews(newsRepository),
-            searchNews = SearchNews(newsRepository)
+            searchNews = SearchNews(newsRepository),
+            upsertArticle = UpsertArticle(newsDao),
+            deleteArticle = DeleteArticle(newsDao),
+            getArticles = GetArticles(newsDao),
+            getArticle = GetArticle(newsDao)
         )
     }
 

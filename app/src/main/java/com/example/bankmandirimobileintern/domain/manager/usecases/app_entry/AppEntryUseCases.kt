@@ -2,5 +2,5 @@ package com.example.bankmandirimobileintern.domain.manager.usecases.app_entry
 
 data class AppEntryUseCases(
     val readAppEntry: ReadAppEntry,
-    val saveAppEntry: SaveAppEntry
+    val saveAppEntry: SaveAppEntry,
 )

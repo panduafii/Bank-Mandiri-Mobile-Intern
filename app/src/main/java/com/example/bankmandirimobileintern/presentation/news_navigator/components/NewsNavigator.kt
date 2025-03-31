@@ -21,7 +21,10 @@ import androidx.navigation.compose.rememberNavController
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.bankmandirimobileintern.R
 import com.example.bankmandirimobileintern.domain.manager.model.Article
+import com.example.bankmandirimobileintern.presentation.bookmark.BookmarkScreen
+import com.example.bankmandirimobileintern.presentation.bookmark.BookmarkViewModel
 import com.example.bankmandirimobileintern.presentation.details.DetailsScreen
+import com.example.bankmandirimobileintern.presentation.details.DetailsViewModel
 import com.example.bankmandirimobileintern.presentation.home.HomeViewModel
 import com.example.bankmandirimobileintern.presentation.navgraph.Route
 import com.example.bankmandirimobileintern.presentation.search.SearchScreen
@@ -127,17 +130,32 @@ fun NewsNavigator() {
                 )
             }
             composable(route = Route.DetailsScreen.route) {
+                val viewModel: DetailsViewModel = hiltViewModel()
                 navController.previousBackStackEntry?.savedStateHandle?.get<Article?>("article")
                     ?.let { article ->
                         DetailsScreen(
                             article = article,
-                            event = {},
-                            navigateUp = { navController.navigateUp() }
+                            event = (viewModel::onEvent),
+                            navigateUp = { navController.navigateUp() },
+                            sideEffect = viewModel.sideEffect.value
                         )
                     }
 
             }
             composable(route = Route.BookmarkScreen.route) {
+
+                val viewModel: BookmarkViewModel = hiltViewModel()
+                val state = viewModel.state.value
+                OnBackClickStateSaver(navController = navController)
+                BookmarkScreen(
+                    state = state,
+                    navigateToDetails = { article ->
+                        navigateToDetails(
+                            navController = navController,
+                            article = article
+                        )
+                    }
+                )
 
             }
         }
