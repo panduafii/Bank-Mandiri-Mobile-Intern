@@ -25,7 +25,7 @@ class NewsPagingSource(
         return try {
             val newsResponse = newsApi.getNews(sources = sources, page = page)
 
-            delay(10000)
+
             // Cetak seluruh artikel untuk investigasi
             newsResponse.articles.forEach { article ->
                 Log.d("NewsAPI", "Title: ${article.title}")

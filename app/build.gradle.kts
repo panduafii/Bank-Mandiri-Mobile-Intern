@@ -2,9 +2,22 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("kotlin-kapt")
-    alias(libs.plugins.dagger.hilt) // Ini sudah menggunakan versi 2.45
+    alias(libs.plugins.dagger.hilt)
     id("kotlin-parcelize")
 }
+
+// Gunakan cara Kotlin untuk membaca properties
+val localProperties: Map<String, String> = (rootProject.projectDir.listFiles() ?: emptyArray())
+    .find { it.name == "local.properties" }
+    ?.let { file ->
+        file.readLines()
+            .mapNotNull { line ->
+                val parts = line.split("=")
+                if (parts.size == 2) parts[0].trim() to parts[1].trim() else null
+            }
+            .toMap()
+    } ?: emptyMap()
+
 
 android {
     namespace = "com.example.bankmandirimobileintern"
@@ -21,8 +34,12 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        // Gunakan safe call untuk mendapatkan API_KEY
+        buildConfigField("String", "API_KEY", "\"${localProperties["API_KEY"] ?: ""}\"")
     }
 
+    // Sisanya tetap sama seperti sebelumnya
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -32,24 +49,31 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+
     kotlinOptions {
         jvmTarget = "17"
     }
+
     buildFeatures {
         compose = true
+        buildConfig = true
     }
+
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.2" // Periksa versi terbaru yang kompatibel dengan Kotlin 1.9.0
+        kotlinCompilerExtensionVersion = "1.5.2"
     }
+
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+
     kapt {
         correctErrorTypes = true
         useBuildCache = false
