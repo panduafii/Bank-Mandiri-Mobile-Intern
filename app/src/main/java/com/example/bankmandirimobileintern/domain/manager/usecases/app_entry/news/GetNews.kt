@@ -4,8 +4,9 @@ import androidx.paging.PagingData
 import com.example.bankmandirimobileintern.domain.manager.model.Article
 import com.example.bankmandirimobileintern.domain.manager.repository.NewsRepository
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class GetNews(
+class GetNews @Inject constructor(
     private val newsRepository: NewsRepository
 ) {
     operator fun invoke(sources: List<String>): Flow<PagingData<Article>> {

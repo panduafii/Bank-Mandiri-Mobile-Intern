@@ -1,5 +1,6 @@
 package com.example.bankmandirimobileintern.data.manager
 
+import android.app.Application
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.MutablePreferences
@@ -11,22 +12,23 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.Preferences
+import javax.inject.Inject
 
 // Membaca dan Menyimpan Preferences menggunakan DataStore
-class LocalUserManagerImpl(
-    private val context: Context
+class LocalUserManagerImpl @Inject constructor(
+    private val application: Application
 ) : LocalUserManager {
 
     // Fungsi untuk menyimpan data (contoh: menyimpan nilai boolean untuk APP_ENTRY)
     override suspend fun saveAppEntry() {
-        context.dataStore.edit { settings ->
+        application.dataStore.edit { settings ->
             settings[PreferenceKeys.APP_ENTRY] = true // Menyimpan nilai true untuk APP_ENTRY
         }
     }
 
     // Fungsi untuk membaca nilai boolean dari DataStore
     override fun readAppEntry(): Flow<Boolean> {
-        return context.dataStore.data.map { preferences ->
+        return application.dataStore.data.map { preferences ->
             preferences[PreferenceKeys.APP_ENTRY] ?: false // Mengambil nilai APP_ENTRY, default false
         }
     }

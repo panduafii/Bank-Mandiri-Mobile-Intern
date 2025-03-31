@@ -2,8 +2,9 @@ package com.example.bankmandirimobileintern.domain.manager.usecases.app_entry.ne
 
 import com.example.bankmandirimobileintern.data.local.NewsDao
 import com.example.bankmandirimobileintern.domain.manager.model.Article
+import javax.inject.Inject
 
-class GetArticle (
+class GetSavedArticle @Inject constructor(
     private val newsDao: NewsDao
 ) {
 

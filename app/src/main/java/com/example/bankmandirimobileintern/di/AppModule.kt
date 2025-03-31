@@ -10,14 +10,10 @@ import com.example.bankmandirimobileintern.data.remote.dto.NewsApi
 import com.example.bankmandirimobileintern.data.repository.NewsRepositoryImpl
 import com.example.bankmandirimobileintern.domain.manager.LocalUserManager
 import com.example.bankmandirimobileintern.domain.manager.repository.NewsRepository
-import com.example.bankmandirimobileintern.domain.manager.usecases.app_entry.AppEntryUseCases
 import com.example.bankmandirimobileintern.domain.manager.usecases.app_entry.ReadAppEntry
 import com.example.bankmandirimobileintern.domain.manager.usecases.app_entry.SaveAppEntry
 import com.example.bankmandirimobileintern.domain.manager.usecases.app_entry.news.DeleteArticle
-import com.example.bankmandirimobileintern.domain.manager.usecases.app_entry.news.GetArticle
-import com.example.bankmandirimobileintern.domain.manager.usecases.app_entry.news.GetArticles
 import com.example.bankmandirimobileintern.domain.manager.usecases.app_entry.news.GetNews
-import com.example.bankmandirimobileintern.domain.manager.usecases.app_entry.news.NewsUseCases
 import com.example.bankmandirimobileintern.domain.manager.usecases.app_entry.news.SearchNews
 import com.example.bankmandirimobileintern.domain.manager.usecases.app_entry.news.UpsertArticle
 import com.example.bankmandirimobileintern.util.Constants.BASE_URL
@@ -33,20 +29,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
-    @Provides
-    @Singleton
-    fun provideLocalUserManger(
-        application: Application
-    ): LocalUserManager = LocalUserManagerImpl(context = application)
-
-    @Provides
-    @Singleton
-    fun provideAppEntryUseCases(
-        localUserManager: LocalUserManager
-    ): AppEntryUseCases = AppEntryUseCases(
-        readAppEntry = ReadAppEntry(localUserManager),
-        saveAppEntry = SaveAppEntry(localUserManager)
-    )
 
     @Provides
     @Singleton
@@ -57,31 +39,6 @@ object AppModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(NewsApi::class.java)
-    }
-
-    @Provides
-    @Singleton
-    fun provideNewsRepository(
-        newsApi: NewsApi,
-        newsDao: NewsDao
-    ): NewsRepository {
-        return NewsRepositoryImpl(newsApi,newsDao)
-    }
-
-    @Provides
-    @Singleton
-    fun provideNewsUseCases(
-        newsRepository: NewsRepository,
-        newsDao: NewsDao
-    ): NewsUseCases {
-        return NewsUseCases(
-            getNews = GetNews(newsRepository),
-            searchNews = SearchNews(newsRepository),
-            upsertArticle = UpsertArticle(newsDao),
-            deleteArticle = DeleteArticle(newsDao),
-            getArticles = GetArticles(newsDao),
-            getArticle = GetArticle(newsDao)
-        )
     }
 
     @Provides

@@ -3,9 +3,10 @@ package com.example.bankmandirimobileintern.domain.manager.usecases.app_entry.ne
 import com.example.bankmandirimobileintern.data.local.NewsDao
 import com.example.bankmandirimobileintern.domain.manager.model.Article
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
 
-class GetArticles(
+class GetSavedArticles @Inject constructor(
     private val newsDao: NewsDao
 ) {
 

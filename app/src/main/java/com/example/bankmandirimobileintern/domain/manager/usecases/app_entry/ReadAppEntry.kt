@@ -2,8 +2,9 @@ package com.example.bankmandirimobileintern.domain.manager.usecases.app_entry
 
 import com.example.bankmandirimobileintern.domain.manager.LocalUserManager
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class ReadAppEntry(
+class ReadAppEntry @Inject constructor(
     private val localUserManager: LocalUserManager
 ) {
 

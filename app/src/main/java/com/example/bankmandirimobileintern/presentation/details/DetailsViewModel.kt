@@ -7,16 +7,20 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.bankmandirimobileintern.domain.manager.model.Article
-import com.example.bankmandirimobileintern.domain.manager.usecases.app_entry.news.NewsUseCases
 import com.example.bankmandirimobileintern.util.UIComponent
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import androidx.compose.runtime.State
+import com.example.bankmandirimobileintern.domain.manager.usecases.app_entry.news.DeleteArticle
+import com.example.bankmandirimobileintern.domain.manager.usecases.app_entry.news.GetSavedArticle
+import com.example.bankmandirimobileintern.domain.manager.usecases.app_entry.news.UpsertArticle
 
 
 @HiltViewModel
 class DetailsViewModel @Inject constructor(
-    private val newsUseCases: NewsUseCases
+    private val getSavedArticleUseCase: GetSavedArticle,
+    private val deleteArticleUseCase: DeleteArticle,
+    private val upsertArticleUseCase: UpsertArticle
 ) : ViewModel() {
 
     private var _sideEffect = mutableStateOf<UIComponent?>(null)
@@ -26,28 +30,27 @@ class DetailsViewModel @Inject constructor(
         when (event) {
             is DetailsEvent.UpsertDeleteArticle -> {
                 viewModelScope.launch {
-                    val existingArticle = newsUseCases.getArticle(url = event.article.url)
-                    if (existingArticle == null) {
+                    val article = getSavedArticleUseCase(url = event.article.url)
+                    if (article == null){
                         upsertArticle(article = event.article)
-                    } else {
-                        deleteArticle(article = existingArticle)
+                    }else{
+                        deleteArticle(article = event.article)
                     }
                 }
             }
             is DetailsEvent.RemoveSideEffect -> {
-                // Gunakan .value untuk mengubah nilai
                 _sideEffect.value = null
             }
         }
     }
 
     private suspend fun deleteArticle(article: Article) {
-        newsUseCases.deleteArticle(article = article)
+        deleteArticleUseCase(article = article)
         _sideEffect.value = UIComponent.Toast("Article deleted")
     }
 
     private suspend fun upsertArticle(article: Article) {
-        newsUseCases.upsertArticle(article = article)
+        upsertArticleUseCase(article = article)
         _sideEffect.value = UIComponent.Toast("Article Inserted")
     }
 }
