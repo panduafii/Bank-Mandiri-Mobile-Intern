@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.bankmandirimobileintern.domain.manager.model.Article
+import kotlinx.coroutines.delay
 
 class NewsPagingSource(
     private val newsApi: NewsApi,
@@ -24,6 +25,7 @@ class NewsPagingSource(
         return try {
             val newsResponse = newsApi.getNews(sources = sources, page = page)
 
+            delay(10000)
             // Cetak seluruh artikel untuk investigasi
             newsResponse.articles.forEach { article ->
                 Log.d("NewsAPI", "Title: ${article.title}")
