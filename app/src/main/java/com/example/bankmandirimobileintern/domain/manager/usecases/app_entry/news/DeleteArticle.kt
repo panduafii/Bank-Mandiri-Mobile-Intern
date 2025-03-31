@@ -4,10 +4,10 @@ import com.example.bankmandirimobileintern.data.local.NewsDao
 import com.example.bankmandirimobileintern.domain.manager.model.Article
 
 
-class UpsertArticle(
+class DeleteArticle(
     private val newsDao: NewsDao
 ) {
     suspend operator fun invoke(article: Article) {
-        newsDao.upsert(article = article)
+        newsDao.delete(article = article)
     }
 }
