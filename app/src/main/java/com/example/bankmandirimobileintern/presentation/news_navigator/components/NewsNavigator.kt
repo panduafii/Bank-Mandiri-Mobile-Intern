@@ -1,5 +1,6 @@
 package com.example.bankmandirimobileintern.presentation.news_navigator.components
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -19,6 +20,8 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.bankmandirimobileintern.R
+import com.example.bankmandirimobileintern.domain.manager.model.Article
+import com.example.bankmandirimobileintern.presentation.details.DetailsScreen
 import com.example.bankmandirimobileintern.presentation.home.HomeViewModel
 import com.example.bankmandirimobileintern.presentation.navgraph.Route
 import com.example.bankmandirimobileintern.presentation.search.SearchScreen
@@ -29,7 +32,7 @@ import com.example.bankmandirimobileintern.presentation.home.HomeScreen
 @Composable
 fun NewsNavigator() {
 
-    val bottomNavigationItems = remember{
+    val bottomNavigationItems = remember {
         listOf(
             BottomNavigationItem(icon = R.drawable.ic_home, text = "Home"),
             BottomNavigationItem(icon = R.drawable.ic_search, text = "Search"),
@@ -42,35 +45,46 @@ fun NewsNavigator() {
     var selectedItem by rememberSaveable {
         mutableStateOf(0)
     }
-    selectedItem = when(backStackState?.destination?.route){
+    selectedItem = when (backStackState?.destination?.route) {
         Route.HomeScreen.route -> 0
         Route.SearchScreen.route -> 1
         Route.BookmarkScreen.route -> 2
         else -> 0
     }
 
-    Scaffold(modifier = Modifier.fillMaxSize(), bottomBar = {
-        NewsBottomNavigation(
-            items = bottomNavigationItems,
-            selectedItem = selectedItem,
-            onItemClick = { index ->
-                when (index) {
-                    0 -> navigateToTab(
-                        navController = navController,
-                        route = Route.HomeScreen.route
-                    )
-                    1 -> navigateToTab(
-                        navController = navController,
-                        route = Route.SearchScreen.route
-                    )
+    //Hide the bottom navigation when the user is in the details screen
+    val isBottomBarVisible = remember(key1 = backStackState) {
+        backStackState?.destination?.route == Route.HomeScreen.route ||
+                backStackState?.destination?.route == Route.SearchScreen.route ||
+                backStackState?.destination?.route == Route.BookmarkScreen.route
+    }
 
-                    2 -> navigateToTab(
-                        navController = navController,
-                        route = Route.BookmarkScreen.route
-                    )
+
+    Scaffold(modifier = Modifier.fillMaxSize(), bottomBar = {
+        if (isBottomBarVisible) {
+            NewsBottomNavigation(
+                items = bottomNavigationItems,
+                selectedItem = selectedItem,
+                onItemClick = { index ->
+                    when (index) {
+                        0 -> navigateToTab(
+                            navController = navController,
+                            route = Route.HomeScreen.route
+                        )
+
+                        1 -> navigateToTab(
+                            navController = navController,
+                            route = Route.SearchScreen.route
+                        )
+
+                        2 -> navigateToTab(
+                            navController = navController,
+                            route = Route.BookmarkScreen.route
+                        )
+                    }
                 }
-            }
-        )
+            )
+        }
     }) {
         val bottomPadding = it.calculateBottomPadding()
         NavHost(
@@ -78,23 +92,65 @@ fun NewsNavigator() {
             startDestination = Route.HomeScreen.route,
             modifier = Modifier.padding(bottom = bottomPadding)
         ) {
-            composable(route = Route.HomeScreen.route) {
+            composable(route = Route.HomeScreen.route) { backStackEntry ->
                 val viewModel: HomeViewModel = hiltViewModel()
                 val articles = viewModel.news.collectAsLazyPagingItems()
-                HomeScreen(articles = articles, navigate = { navigateToTab(navController = navController, route = it) })
+                HomeScreen(
+                    articles = articles,
+                    navigateToSearch = {
+                        navigateToTab(
+                            navController = navController,
+                            route = Route.SearchScreen.route
+                        )
+                    },
+                    navigateToDetails = { article ->
+                        navigateToDetails(
+                            navController = navController,
+                            article = article
+                        )
+                    }
+                )
             }
             composable(route = Route.SearchScreen.route) {
                 val viewModel: SearchViewModel = hiltViewModel()
                 val state = viewModel.state.value
-                SearchScreen(state = state, event = viewModel::onEvent)
+                OnBackClickStateSaver(navController = navController)
+                SearchScreen(
+                    state = state,
+                    event = viewModel::onEvent,
+                    navigateToDetails = {article ->
+                        navigateToDetails(
+                            navController = navController,
+                            article = article
+                        )
+                    }
+                )
             }
             composable(route = Route.DetailsScreen.route) {
+                navController.previousBackStackEntry?.savedStateHandle?.get<Article?>("article")
+                    ?.let { article ->
+                        DetailsScreen(
+                            article = article,
+                            event = {},
+                            navigateUp = { navController.navigateUp() }
+                        )
+                    }
 
             }
             composable(route = Route.BookmarkScreen.route) {
 
             }
         }
+    }
+}
+
+@Composable
+fun OnBackClickStateSaver(navController: NavController) {
+    BackHandler(true) {
+        navigateToTab(
+            navController = navController,
+            route = Route.HomeScreen.route
+        )
     }
 }
 
@@ -108,4 +164,11 @@ private fun navigateToTab(navController: NavController, route: String) {
         launchSingleTop = true
         restoreState = true
     }
+}
+
+private fun navigateToDetails(navController: NavController, article: Article){
+    navController.currentBackStackEntry?.savedStateHandle?.set("article", article)
+    navController.navigate(
+        route = Route.DetailsScreen.route
+    )
 }

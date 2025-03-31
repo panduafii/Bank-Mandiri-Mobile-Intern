@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.example.bankmandirimobileintern.domain.manager.model.Article
 import com.example.bankmandirimobileintern.presentation.Dimens.BigPadding1
 import com.example.bankmandirimobileintern.presentation.Dimens.MediumPadding1
 import com.example.bankmandirimobileintern.presentation.Dimens.MediumPadding2
@@ -20,7 +21,8 @@ import com.example.bankmandirimobileintern.presentation.common.SearchBar
 @Composable
 fun SearchScreen(
     state: SearchState,
-    event: (SearchEvent) -> Unit
+    event:(SearchEvent) -> Unit,
+    navigateToDetails:(Article) -> Unit
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
 
@@ -48,9 +50,10 @@ fun SearchScreen(
             val articles = it.collectAsLazyPagingItems()
             ArticlesList(
                 articles = articles,
-                onClick = {
-                    //TODO: Navigate to details screen
-                }
+//                onClick = {
+//                    //TODO: Navigate to details screen
+//                }
+                onClick = navigateToDetails
             )
         }
     }
