@@ -3,9 +3,9 @@ An Android app built with Jetpack Compose and the latest android libraries. Demo
 
 # Bank Mandiri Mobile Intern
 
-<img width="716" alt="OB_W1" src="https://github.com/user-attachments/assets/bf2f626c-9a9d-4772-a225-1ae990cf0893">
-<img width="716" alt="OB_W2" src="https://github.com/user-attachments/assets/4efa12b2-705a-41a4-bce2-d02cfc5c6088">
-<img width="716" alt="OB_W3" src="https://github.com/user-attachments/assets/6b134829-1c3f-4551-bf85-5edf39d82259">
+<img width="300" alt="OB_W1" src="https://github.com/user-attachments/assets/bf2f626c-9a9d-4772-a225-1ae990cf0893">
+<img width="300" alt="OB_W2" src="https://github.com/user-attachments/assets/4efa12b2-705a-41a4-bce2-d02cfc5c6088">
+<img width="300" alt="OB_W3" src="https://github.com/user-attachments/assets/6b134829-1c3f-4551-bf85-5edf39d82259">
 <img width="716" alt="HOME_W" src="https://github.com/user-attachments/assets/242e9b11-a187-41e5-8477-a4ff63325942">
 <img width="716" alt="DETAIL_W" src="https://github.com/user-attachments/assets/919a146b-983e-42f1-a9ee-d4ddc0a08bb8">
 <img width="716" alt="SEARCH_W" src="https://github.com/user-attachments/assets/95c1b7c7-9f6b-482f-8f4a-0c1f9c675f1e">
