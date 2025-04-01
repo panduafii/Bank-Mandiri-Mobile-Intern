@@ -21,7 +21,8 @@ An Android app built with Jetpack Compose and the latest android libraries. Demo
 <img width="300" alt="SHR_B" src="https://github.com/user-attachments/assets/33847d82-f8c1-4cc7-bcd8-25e69b0985cf">
 
 # Clean Architecture Implementation in the App Structure
-<img width="960" alt="Screenshot 2025-03-29 at 01 35 56" src="https://github.com/user-attachments/assets/ad06b62d-2632-4056-802c-50f07347c89e" />
+![architecture0](https://github.com/user-attachments/assets/2d60bb71-93e2-443b-802c-168ce11cad80)
+
 
 The architecture follows a modular Clean Architecture approach, dividing the codebase into three main layers: Presentation, Data, and Domain. This separation allows for better scalability, maintainability, and testing.
 
