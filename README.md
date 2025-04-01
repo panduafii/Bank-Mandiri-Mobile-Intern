@@ -26,11 +26,11 @@ An Android app built with Jetpack Compose and the latest android libraries. Demo
 
 The architecture follows a modular Clean Architecture approach, dividing the codebase into three main layers: Presentation, Data, and Domain. This separation allows for better scalability, maintainability, and testing.
 
-Presentation Layer (Blue): This layer contains the user interface components and ViewModels that handle UI logic. It interacts with the Domain and Data layers through dependency injection (DI). Components like Views and ViewModels manage the UI state and handle user actions.
+- Presentation Layer (Blue): This layer contains the user interface components and ViewModels that handle UI logic. It interacts with the Domain and Data layers through dependency injection (DI). Components like Views and ViewModels manage the UI state and handle user actions.
 
-Data Layer (Green): This layer handles data retrieval and transformation. It interacts with remote and local data sources (Api, DataSource) and mappers that convert remote models into domain models. It also contains the repository implementations that are responsible for data management and caching.
+- Data Layer (Green): This layer handles data retrieval and transformation. It interacts with remote and local data sources (Api, DataSource) and mappers that convert remote models into domain models. It also contains the repository implementations that are responsible for data management and caching.
 
-Domain Layer (Pink): This layer contains the core business logic, independent of any external dependencies. It defines the UseCases, repositories (interfaces), and domain models. The UseCases define the business operations that the app performs and act as a bridge between the Presentation and Data layers.
+- Domain Layer (Pink): This layer contains the core business logic, independent of any external dependencies. It defines the UseCases, repositories (interfaces), and domain models. The UseCases define the business operations that the app performs and act as a bridge between the Presentation and Data layers.
 
 Each layer has clearly defined responsibilities, ensuring that changes in one layer don’t affect the others, which ultimately improves code maintainability and testability. The separation of concerns allows each part of the app to evolve independently, making it easier to manage dependencies and scale the application in the future.
 
